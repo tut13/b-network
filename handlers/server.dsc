@@ -2,7 +2,7 @@ server_handler:
   type: world
   debug: false
   events:
-    on system time minutely:
+    on system time hourly:
       - adjust server save
 
     after server start:
@@ -14,15 +14,19 @@ server_handler:
       - define padding <element[ ★ ].repeat[4]>
       - define motd <[padding]><[text]><[padding]>
       #- determine passively ICON:https<&co>//api.behr.dev//images/st_patricks_day/<util.random.int[1].to[11]>.png
-      - determine passively icon:icons/st_patricks_day/<util.random.int[1].to[11]>.png
+      - if <util.time_now.month> == 3:
+        - determine passively icon:icons/st_patricks_day/<util.random.int[1].to[11]>.png
+      - else:
+        - determine passively icon:icons/generic/1_downscaled.png
       - determine <[motd].color_gradient[from=#0000FF;to=#FF0000;style=hsb]>
 
-    on proxy server list ping:
-      - define text <script.data_key[data.splashes].random>
-      - define text_length <[text].length>
-      - define padding <element[ ★ ].repeat[4]>
-      - define motd <[padding]><[text]><[padding]>
-      - determine motd:<[motd].color_gradient[from=#0000FF;to=#FF0000;style=hsb]>
+    # disabled?
+    #on proxy server list ping:
+    #  - define text <script.parsed_key[data.splashes].random>
+    #  - define text_length <[text].length>
+    #  - define padding <element[ ★ ].repeat[4]>
+    #  - define motd <[padding]><[text]><[padding]>
+    #  - determine motd:<[motd].color_gradient[from=#0000FF;to=#FF0000;style=hsb]>
   data:
     splashes:
     - It is Wednesday my dudes!
@@ -336,8 +340,7 @@ server_handler:
     - Who put it there?
     - You can't explain that!
     - if not ok then return end
-    - §1C§2o§3l§4o§5r§6m§7a§8t§9i§ac
-    - §kFUNKY LOL
+    - <&1>C<&2>O<&3>l<&4>o<&5>r<&6>m<&7>a<&8>t<&9>i<&a>c
     - Big Pointy Teeth!
     - Bekarton guards the gate!
     - Mmmph, mmph!
@@ -441,7 +444,7 @@ server_handler:
     - Honey, I grew the bees!
     - Find your claw!
     - Everybody do the Leif!
-    - <3 Max & 99 & Ducky!
+    - <&lt>3 Max & 99 & Ducky!
     - Bushy eyebrows!
     - Edit is a name!
     - From free range developers!
@@ -466,7 +469,7 @@ server_handler:
     - [this splash text is now available]
     - Contains simulated goats!
     - Home-made!
-    - There's <<a cat on ,my keyboard!~
+    - There's <&lt><&lt>a cat on ,my keyboard!~
     - The cutest predator you'll ever meet!
     - Now you are thinking with pistons!
     - Get to the coppah!

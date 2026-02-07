@@ -44,7 +44,7 @@ world_command:
   script:
     # % ██ [  check args ] ██
     - if <context.args.is_empty> || <context.args.size> > 3:
-      - inject command_syntax
+      - inject command_syntax_error
 
     - define loaded_worlds <server.worlds.parse[name]>
     - define world_name <context.args.last>
@@ -94,8 +94,8 @@ world_command:
               - define reason "Invalid world name"
               - inject command_error
 
-            - flag player behr.essentials.teleport.back.location:<player.location>
-            - flag player behr.essentials.teleport.back.name:<player.world.name>
+            - flag player behr.essentials.teleport.last_teleport.location:<player.location>
+            - flag player behr.essentials.teleport.last_teleport.world_name:<player.world.name>
             - define location <world[<context.args.first>].spawn_location>
             - narrate "<&[green]>Teleported you to <[location].simple>"
             - teleport <[location]>
@@ -203,8 +203,8 @@ world_command:
               - define reason "That world is unloaded or does not exist."
               - inject command_error
 
-            - flag player behr.essentials.teleport.back.location:<player.location>
-            - flag player behr.essentials.teleport.back.name:<player.world.name>
+            - flag player behr.essentials.teleport.last_teleport.location:<player.location>
+            - flag player behr.essentials.teleport.last_teleport.world_name:<player.world.name>
             - define location <world[<[world_name]>].spawn_location>
             - narrate "<&[green]>Teleported you to <[location].simple>"
             - teleport <[location]>
@@ -224,8 +224,8 @@ world_command:
           - define reason "That world is unloaded or does not exist."
           - inject command_error
 
-        - flag player behr.essentials.teleport.back.location:<[player].location>
-        - flag player behr.essentials.teleport.back.name:<[player].world.name>
+        - flag player behr.essentials.teleport.last_teleport.location:<[player].location>
+        - flag player behr.essentials.teleport.last_teleport.world_name:<[player].world.name>
         - define location <world[<[world_name]>].spawn_location>
         - narrate "<&[green]>Teleported <[player].name> to <[location].simple>"
         - narrate "<&[green]>Teleported you to <[location].simple>" targets:<[player]>
